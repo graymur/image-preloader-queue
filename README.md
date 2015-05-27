@@ -27,7 +27,7 @@ Add images to queue.
 ```js
 queue.add(['http://example.com/image1.jpg', 'http://example.com/image2.jpg']);
 queue.add('http://example.com/image3.jpg', 'http://example.com/image4.jpg');
-queue.add(]'http://example.com/image5.jpg', 'http://example.com/image6.jpg'], 'http://example.com/image7.jpg');
+queue.add(['http://example.com/image5.jpg', 'http://example.com/image6.jpg'], 'http://example.com/image7.jpg');
 ```
 
 #### start
@@ -100,11 +100,13 @@ queue.onQueueLoad(function () {
 
 Progress = number of processed images / total number of images. This show progress in number of loaded images, not bytes loaded.
 
+```js
 jQuery('#progress').text(Math.round(queue.getProgress() * 100) + '%');
 
 queue.getProgress(function () {
     console.log(queue.getLoaded());
 });
+```
 
 #### getLoaded
 
