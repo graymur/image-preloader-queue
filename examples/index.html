@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #images {
+            overflow: hidden;
+        }
+
+        #images IMG {
+            display: block;
+            height: 200px;
+            float: left;
+            margin: 0 20px 20px 0;
+        }
+
+        #messages {
+            font-family: Courier;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="../images-preloader-queue.js"></script>
+<div id="controls">
+    <input type="button" id="start" value="Start">
+    <input type="button" id="pause" value="Pause">
+    <input type="button" id="pause4" value="Pause for 2 seconds" data-value="2000">
+</div>
+<div id="progress">0%</div>
+<div id="images"></div>
+<div id="messages"></div>
+<script>
+    "use strict";
+
+    var queue;
+
+    var imagesContainer = $('#images');
+    var messagesContainer = $('#messages');
+    var progressContainer = $('#progress');
+
+    $('#start').click(function () {
+        log('<span style="color: gray">Starting</span>');
+        queue.start();
+    });
+
+    $('#pause').click(function () {
+        log('<span style="color: gray">Pausing</span>');
+        queue.pause();
+    });
+
+    $('#pause4').click(function () {
+        log('<span style="color: gray">Pausing and resuming</span>');
+        queue.pauseFor($(this).data('value'));
+    });
+
+    function dv(v) {
+        console.log(v);
+    }
+
+    function log(string) {
+        messagesContainer.html(messagesContainer.html() + string + '<br>');
+    }
+
+    var images = [
+        'https://farm9.staticflickr.com/8517/8400604049_5ddaa2d1ab_h.jpg',
+        'https://farm9.staticflickr.com/8369/8397734127_de5c5370e1_h.jpg',
+        'https://farm9.staticflickr.com/8197/8175452800_56572cb25e_h.jpg',
+        'https://farm9.staticflickr.com/8321/8028690843_5b2318a81f_h.jpg',
+        'https://farm9.staticflickr.com/8394/8629745441_ad34e70ec1_h.jpg',
+        'https://farm9.staticflickr.com/8423/7627901748_75e567996f_h.jpg',
+        'https://farm9.staticflickr.com/8208/8210898721_842e0d8543_h.jpg',
+        'https://farm9.staticflickr.com/8513/8415575975_a09826e88f_h.jpg',
+        'https://farm9.staticflickr.com/8216/8282038874_77fec95c45_h.jpg',
+        'https://farm9.staticflickr.com/8238/8546923045_1219f34721_h.jpg',
+        'https://farm9.staticflickr.com/8235/8376650653_b11a8bec9c_h.jpg',
+        'https://farm9.staticflickr.com/8216/8416672802_0d424df024_h.jpg'
+    ];
+
+    queue = imagePreloaderQueue();
+
+    queue.add(images);
+
+    queue.onBeforeItemLoad(function (src) {
+        log('Loading: ' + src);
+    });
+
+    queue.onAfterItemLoad(function (src) {
+        log('<span style="color: green">Loaded: ' + src + '</span>');
+        imagesContainer.append('<img src="' + src + '" alt="">');
+    });
+
+    queue.onItemError(function (src) {
+        log('<span style="color: red">Failed to load: ' + src + '</span>');
+    });
+
+    queue.onAfterItem(function (src) {
+        progressContainer.text(Math.round(queue.getProgress() * 100) + '%');
+    });
+
+    queue.onQueueLoad(function () {
+        log('All loaded');
+    });
+</script>
+</body>
+</html>
