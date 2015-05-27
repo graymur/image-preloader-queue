@@ -19,8 +19,6 @@
             onAfterItemCallbacks = [],
             onQueueLoadCallbacks = [],
             started = false
-            //loading = false,
-            //paused = false
         ;
 
         /**
