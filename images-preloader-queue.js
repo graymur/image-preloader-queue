@@ -2,7 +2,7 @@
     if (typeof define === 'function' && define.amd) {
         define([], factory);
     } else {
-        root.imagePreloaderQueue = factory();
+        root['imagePreloaderQueue'] = factory();
     }
 }(this, function () {
     'use strict';
@@ -42,17 +42,17 @@
          * @returns {Array}
          */
         function getArgsArray(args) {
-            var i, retval = [];
+            args = Array.prototype.slice.call(args, 0);
 
-            for (i = 0; i < args.length; i++) {
-                if (Object.prototype.toString.call(args[i]) === '[object Array]') {
-                    retval = retval.concat(args[i]);
+            return args.reduce(function (carry, element) {
+                if (Object.prototype.toString.call(element) === '[object Array]') {
+                    carry = carry.concat(element);
                 } else {
-                    retval.push(args[i]);
+                    carry.push(element);
                 }
-            }
 
-            return retval;
+                return carry;
+            });
         }
 
         /*
