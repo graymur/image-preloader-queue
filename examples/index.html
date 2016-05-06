@@ -23,7 +23,7 @@
 </head>
 <body>
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="../images-preloader-queue.js"></script>
+<script src="../index.js"></script>
 <div id="controls">
     <input type="button" id="start" value="Start">
     <input type="button" id="pause" value="Pause">
@@ -55,10 +55,6 @@
         log('<span style="color: gray">Pausing and resuming</span>');
         queue.pauseFor($(this).data('value'));
     });
-
-    function dv(v) {
-        console.log(v);
-    }
 
     function log(string) {
         messagesContainer.html(messagesContainer.html() + string + '<br>');
