@@ -5,14 +5,14 @@ var gulp = require('gulp'),
 ;
 
 gulp.task('hint', function() {
-    return gulp.src('./images-preloader-queue.js')
+    return gulp.src('./index.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         ;
 });
 
 gulp.task('minify', function() {
-    return gulp.src(['./images-preloader-queue.js'])
+    return gulp.src(['./index.js'])
         .pipe(uglify())
         .pipe(gulp.dest('./minified'))
     ;
@@ -20,7 +20,7 @@ gulp.task('minify', function() {
 
 gulp.task('watch', function() {
     // watch JS modules files
-    gulp.watch('./images-preloader-queue.js', ['hint', 'minify']);
+    gulp.watch('./index.js', ['hint', 'minify']);
 });
 
 gulp.task('default', ['watch']);

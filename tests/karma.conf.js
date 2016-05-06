@@ -3,7 +3,7 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      '../images-preloader-queue.js',
+      '../index.js',
       '*.js'
     ],
     exclude: [],
