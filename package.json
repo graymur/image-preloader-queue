@@ -1,7 +1,7 @@
 {
   "name": "image-preloader-queue",
   "description": "Image preloader queue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-jshint": "^1.9.2",
